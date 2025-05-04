@@ -1,0 +1,36 @@
+name: Deploy new rules to TrailAlerts S3
+
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'rules/**'
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy-rules:
+    runs-on: ubuntu-latest
+    
+    env:
+      AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Login to AWS
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-region: us-east-1
+        role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/TrailAlertsGitHubActionsRole
+        role-session-name: TrailAlertsGitHubActionsSession
+        role-duration-seconds: 900
+
+    - name: Upload rules to S3
+      run: |
+        aws s3 cp rules/ s3://trailalerts-rules-${{ env.AWS_ACCOUNT_ID }}/ --recursive
+        echo "Rules uploaded to S3 bucket."

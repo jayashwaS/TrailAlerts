@@ -1,0 +1,83 @@
+{
+  "should_match": [
+    {
+      "eventVersion": "1.08",
+      "userIdentity": {
+        "type": "IAMUser",
+        "principalId": "AIDASZSTLCAWCAFWFS22H",
+        "arn": "arn:aws:iam::192374575148:user/TrailDiscover",
+        "accountId": "192374575148",
+        "userName": "TrailDiscover",
+        "accessKeyId": "AKIASZSTLCAWF4CPBKMF"
+      },
+      "eventTime": "2024-08-18T09:51:41Z",
+      "eventSource": "lambda.amazonaws.com",
+      "eventName": "UpdateFunctionConfiguration20150331v2",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "109.196.12.142",
+      "userAgent": "aws-cli/2.17.32 md/awscrt#0.21.2 ua/2.0 os/linux#5.10.16.3-microsoft-standard-WSL2 md/arch#x86_64 lang/python#3.11.9 md/pyimpl#CPython exec-env/grimoire_b2263383-47d1-4e4f-a843-419ad77464a6 cfg/retry-mode#standard md/installer#exe md/distrib#ubuntu.24 md/prompt#off md/command#lambda.update-function-configuration",
+      "errorCode": "AccessDenied",
+      "errorMessage": "User: arn:aws:iam::192374575148:user/TrailDiscover is not authorized to perform: lambda:UpdateFunctionConfiguration on resource: arn:aws:lambda:us-east-1:192374575148:function:my-function because no identity-based policy allows the lambda:UpdateFunctionConfiguration action",
+      "requestParameters": {
+        "functionName": "my-function",
+        "layers": [
+          "arn:aws:lambda:us-east-1:123456789012:layer:my-layer:1",
+          "arn:aws:lambda:us-east-1:123456789012:layer:my-other-layer:2"
+        ]
+      },
+      "responseElements": null,
+      "requestID": "4dcd19cd-38e0-4ccb-ac5e-bc79a8105f7f",
+      "eventID": "a97b0d3f-71ef-4db3-9d79-8d1f690e36ce",
+      "readOnly": false,
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "192374575148",
+      "eventCategory": "Management",
+      "tlsDetails": {
+        "tlsVersion": "TLSv1.3",
+        "cipherSuite": "TLS_AES_128_GCM_SHA256",
+        "clientProvidedHostHeader": "lambda.us-east-1.amazonaws.com"
+      }
+    }       
+  ],
+  "should_not_match": [
+    {
+      "eventVersion": "1.09",
+      "userIdentity": {
+        "type": "AssumedRole",
+        "principalId": "AROEXAMPLE",
+        "arn": "arn:aws:sts::123456789012:assumed-role/ExampleRole/ExampleUser",
+        "accountId": "123456789012",
+        "accessKeyId": "ASIAXXXXXX",
+        "sessionContext": {
+          "sessionIssuer": {
+            "type": "Role",
+            "principalId": "AROEXAMPLE",
+            "arn": "arn:aws:iam::123456789012:role/ExampleRole",
+            "accountId": "123456789012",
+            "userName": "ExampleUserName"
+          },
+          "attributes": {
+            "creationDate": "2025-03-09T16:39:29Z",
+            "mfaAuthenticated": "false"
+          }
+        }
+      },
+      "eventTime": "2025-03-09T16:39:48Z",
+      "eventSource": "cloudtrail.amazonaws.com",
+      "eventName": "ListNotificationHubs",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "1.2.3.4",
+      "userAgent": "ExampleAgent/1.0",
+      "requestParameters": null,
+      "responseElements": null,
+      "requestID": "4c23c774-e2b5-46fe-83b9-EXAMPLE",
+      "eventID": "2a9c402c-5df4-4e68-a21f-EXAMPLE",
+      "readOnly": true,
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "123456789012",
+      "eventCategory": "Management"
+    }
+  ]
+}

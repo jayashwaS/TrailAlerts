@@ -1,0 +1,27 @@
+title: AWS SSM GetParameter(s) with Decryption
+id: 3c4d5e6f-7a8b-9c0d-1e2f-3a4b5c6d7e8f
+status: test
+description: Detects usage of the GetParameter and GetParameters API calls with the withDecryption flag set to true, which retrieves decrypted SecureString parameters from AWS Systems Manager Parameter Store.
+references:
+  - https://stratus-red-team.cloud/attack-techniques/AWS/aws.credential-access.ssm-retrieve-securestring-parameters/
+  - https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_GetParameter.html
+  - https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_GetParameters.html
+author: adanalvarez
+date: 2025-04-12
+modified: 2025-04-12
+tags:
+  - attack.credential_access
+  - attack.t1552
+logsource:
+  product: aws
+  service: ssm
+detection:
+  selection:
+    eventSource: ssm.amazonaws.com
+    eventName:
+      - GetParameter
+      - GetParameters
+  condition: selection
+falsepositives:
+  - Legitimate administrative actions retrieving SecureString parameters with decryption
+level: medium

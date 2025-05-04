@@ -1,0 +1,66 @@
+{
+  "should_match": [
+    {
+      "eventVersion": "1.09",
+      "userIdentity": {
+        "type": "IAMUser",
+        "principalId": "AIDA123456789EXAMPLE",
+        "arn": "arn:aws:iam::123456789012:user/admin",
+        "accountId": "123456789012",
+        "accessKeyId": "AKIA123456789EXAMPLE",
+        "userName": "admin"
+      },
+      "eventTime": "2025-04-12T16:25:48Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "UpdateLoginProfile",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "192.0.2.1",
+      "userAgent": "aws-cli/2.9.19",
+      "requestParameters": {
+        "userName": "victim",
+        "password": "********",
+        "passwordResetRequired": false
+      },
+      "responseElements": null,
+      "requestID": "abcd1234-ef56-7890-abcd-ef1234567890",
+      "eventID": "2a9c402c-5df4-4e68-a21f-EXAMPLE",
+      "readOnly": false,
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "123456789012",
+      "eventCategory": "Management"
+    }
+  ],
+  "should_not_match": [
+    {
+      "eventVersion": "1.09",
+      "userIdentity": {
+        "type": "IAMUser",
+        "principalId": "AIDA123456789EXAMPLE",
+        "arn": "arn:aws:iam::123456789012:user/user1",
+        "accountId": "123456789012",
+        "accessKeyId": "AKIA123456789EXAMPLE",
+        "userName": "user1"
+      },
+      "eventTime": "2025-04-12T16:28:32Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "UpdateLoginProfile",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "192.0.2.1",
+      "userAgent": "aws-cli/2.9.19",
+      "requestParameters": {
+        "userName": "user1",
+        "password": "********",
+        "passwordResetRequired": false
+      },
+      "responseElements": null,
+      "requestID": "abcd1234-ef56-7890-abcd-ef1234567890",
+      "eventID": "2a9c402c-5df4-4e68-a21f-EXAMPLE",
+      "readOnly": false,
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "123456789012",
+      "eventCategory": "Management"
+    }
+  ]
+}

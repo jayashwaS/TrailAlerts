@@ -1,0 +1,106 @@
+{
+  "should_match": [
+    {
+      "eventVersion": "1.09",
+      "userIdentity": {
+        "type": "IAMUser",
+        "principalId": "AIDA123456789EXAMPLE",
+        "arn": "arn:aws:iam::123456789012:user/attacker",
+        "accountId": "123456789012",
+        "accessKeyId": "AKIA123456789EXAMPLE",
+        "userName": "attacker"
+      },
+      "eventTime": "2025-04-12T17:15:48Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "GetLoginProfile",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "192.0.2.1",
+      "userAgent": "S3 Browser 9.5.3",
+      "requestParameters": {
+        "userName": "victim-user"
+      },
+      "responseElements": null,
+      "requestID": "abcd1234-ef56-7890-abcd-ef1234567890",
+      "eventID": "2a9c402c-5df4-4e68-a21f-EXAMPLE",
+      "readOnly": true,
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "123456789012",
+      "eventCategory": "Management"
+    },
+    {
+      "eventVersion": "1.09",
+      "userIdentity": {
+        "type": "IAMUser",
+        "principalId": "AIDA123456789EXAMPLE",
+        "arn": "arn:aws:iam::123456789012:user/attacker",
+        "accountId": "123456789012",
+        "accessKeyId": "AKIA123456789EXAMPLE",
+        "userName": "attacker"
+      },
+      "eventTime": "2025-04-12T17:18:22Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "CreateLoginProfile",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "192.0.2.1",
+      "userAgent": "S3 Browser 9.5.3",
+      "requestParameters": {
+        "userName": "victim-user",
+        "password": "********",
+        "passwordResetRequired": false
+      },
+      "responseElements": {
+        "loginProfile": {
+          "userName": "victim-user",
+          "createDate": "2025-04-12T17:18:22Z",
+          "passwordResetRequired": false
+        }
+      },
+      "requestID": "efgh5678-ab12-3456-cdef-gh7890123456",
+      "eventID": "3b0d513d-6af5-4f79-b32e-EXAMPLE",
+      "readOnly": false,
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "123456789012",
+      "eventCategory": "Management"
+    }
+  ],
+  "should_not_match": [
+    {
+      "eventVersion": "1.09",
+      "userIdentity": {
+        "type": "IAMUser",
+        "principalId": "AIDA123456789EXAMPLE",
+        "arn": "arn:aws:iam::123456789012:user/admin",
+        "accountId": "123456789012",
+        "accessKeyId": "AKIA123456789EXAMPLE",
+        "userName": "admin"
+      },
+      "eventTime": "2025-04-12T17:22:32Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "CreateLoginProfile",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "192.0.2.1",
+      "userAgent": "aws-cli/2.9.19",
+      "requestParameters": {
+        "userName": "new-user",
+        "password": "********",
+        "passwordResetRequired": true
+      },
+      "responseElements": {
+        "loginProfile": {
+          "userName": "new-user",
+          "createDate": "2025-04-12T17:22:32Z",
+          "passwordResetRequired": true
+        }
+      },
+      "requestID": "ijkl9012-cd34-5678-efgh-ij1234567890",
+      "eventID": "4c1e624e-7bg6-5h80-c43f-EXAMPLE",
+      "readOnly": false,
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "123456789012",
+      "eventCategory": "Management"
+    }
+  ]
+}

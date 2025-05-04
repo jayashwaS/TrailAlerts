@@ -1,0 +1,26 @@
+title: AWS CloudTrail Attach Policy
+id: 4f60cc0-36fb-42b7-9b58-a5b53019fb74
+status: test
+description: Detects attaching a policy to an IAM user
+references:
+    - https://traildiscover.cloud/#IAM-AttachPolicy
+author: adanalvarez
+date: 2025-03-30
+modified: 2025-03-30
+tags:
+    - attack.persistence
+    - attack.t1078
+logsource:
+    product: aws
+    service: iam
+detection:
+    selection_source:
+        eventSource: iam.amazonaws.com
+        eventName:
+            - AttachUserPolicy
+            - AttachGroupPolicy
+            - AttachRolePolicy
+    condition: selection_source
+falsepositives:
+    - Valid IAM user creation
+level: medium

@@ -1,0 +1,25 @@
+title: AWS Organizations LeaveOrganization API Call
+id: 6a7b8c9d-0e1f-2a3b-4c5d-6e7f8g9h0i1j
+status: test
+description: Detects usage of the LeaveOrganization API call, which removes a member account from its parent AWS Organization.
+references:
+  - https://stratus-red-team.cloud/attack-techniques/AWS/aws.defense-evasion.organizations-leave/
+  - https://docs.aws.amazon.com/organizations/latest/APIReference/API_LeaveOrganization.html
+author: adanalvarez
+date: 2025-04-12
+modified: 2025-04-12
+tags:
+  - attack.defense_evasion
+  - attack.t1562.001
+logsource:
+  product: aws
+  service: organizations
+  category: management
+detection:
+  selection:
+    eventSource: organizations.amazonaws.com
+    eventName: LeaveOrganization
+  condition: selection
+falsepositives:
+  - Legitimate administrative actions removing an account from an organization
+level: high

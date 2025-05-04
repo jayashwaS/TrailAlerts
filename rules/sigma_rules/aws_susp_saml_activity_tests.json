@@ -1,0 +1,139 @@
+{
+  "should_match": [
+    {
+      "eventVersion": "1.09",
+      "userIdentity": {
+        "type": "AssumedRole",
+        "principalId": "AROEXAMPLE",
+        "arn": "arn:aws:sts::123456789012:assumed-role/ExampleRole/ExampleUser",
+        "accountId": "123456789012",
+        "accessKeyId": "ASIAXXXXXX",
+        "sessionContext": {
+          "sessionIssuer": {
+            "type": "Role",
+            "principalId": "AROEXAMPLE",
+            "arn": "arn:aws:iam::123456789012:role/ExampleRole",
+            "accountId": "123456789012",
+            "userName": "ExampleUserName"
+          },
+          "attributes": {
+            "creationDate": "2025-03-09T16:39:29Z",
+            "mfaAuthenticated": "false"
+          }
+        }
+      },
+      "eventTime": "2025-04-12T16:45:48Z",
+      "eventSource": "sts.amazonaws.com",
+      "eventName": "AssumeRoleWithSAML",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "192.0.2.1",
+      "userAgent": "aws-cli/2.9.19",
+      "requestParameters": {
+        "roleArn": "arn:aws:iam::123456789012:role/SAMLAdminRole",
+        "principalArn": "arn:aws:iam::123456789012:saml-provider/OktaSAML",
+        "samlAssertion": "PHNhbWw6QXNzZXJ0aW9uIHhtbG5zOnNhbWw9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDphc3NlcnRpb24i..."
+      },
+      "responseElements": {
+        "credentials": {
+          "accessKeyId": "ASIAXXXXXXXXXXXXXXXX",
+          "sessionToken": "TOKEN_REDACTED",
+          "expiration": "2025-04-12T20:45:48Z" 
+        },
+        "assumedRoleUser": {
+          "assumedRoleId": "AROAXXXXXXXXXXXXXXXXXXXX:user@domain.com",
+          "arn": "arn:aws:sts::123456789012:assumed-role/SAMLAdminRole/user@domain.com"
+        }
+      },
+      "requestID": "abcd1234-ef56-7890-abcd-ef1234567890",
+      "eventID": "2a9c402c-5df4-4e68-a21f-EXAMPLE",
+      "readOnly": true,
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "123456789012",
+      "eventCategory": "Management"
+    },
+    {
+      "eventVersion": "1.09",
+      "userIdentity": {
+        "type": "AssumedRole",
+        "principalId": "AROEXAMPLE",
+        "arn": "arn:aws:sts::123456789012:assumed-role/ExampleRole/ExampleUser",
+        "accountId": "123456789012",
+        "accessKeyId": "ASIAXXXXXX",
+        "sessionContext": {
+          "sessionIssuer": {
+            "type": "Role",
+            "principalId": "AROEXAMPLE",
+            "arn": "arn:aws:iam::123456789012:role/ExampleRole",
+            "accountId": "123456789012",
+            "userName": "ExampleUserName"
+          },
+          "attributes": {
+            "creationDate": "2025-03-09T16:39:29Z",
+            "mfaAuthenticated": "false"
+          }
+        }
+      },
+      "eventTime": "2025-04-12T16:48:22Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "UpdateSAMLProvider",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "192.0.2.1",
+      "userAgent": "aws-cli/2.9.19",
+      "requestParameters": {
+        "samlMetadataDocument": "<md:EntityDescriptor xmlns:md=\"urn:oasis:names:tc:SAML:2.0:metadata\"...",
+        "samlProviderArn": "arn:aws:iam::123456789012:saml-provider/OktaSAML"
+      },
+      "responseElements": null,
+      "requestID": "efgh5678-ab12-3456-cdef-gh7890123456",
+      "eventID": "2a9c402c-5df4-4e68-a21f-EXAMPLE",
+      "readOnly": true,
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "123456789012",
+      "eventCategory": "Management"
+    }
+  ],
+  "should_not_match": [
+    {
+      "eventVersion": "1.09",
+      "userIdentity": {
+        "type": "AssumedRole",
+        "principalId": "AROEXAMPLE",
+        "arn": "arn:aws:sts::123456789012:assumed-role/ExampleRole/ExampleUser",
+        "accountId": "123456789012",
+        "accessKeyId": "ASIAXXXXXX",
+        "sessionContext": {
+          "sessionIssuer": {
+            "type": "Role",
+            "principalId": "AROEXAMPLE",
+            "arn": "arn:aws:iam::123456789012:role/ExampleRole",
+            "accountId": "123456789012",
+            "userName": "ExampleUserName"
+          },
+          "attributes": {
+            "creationDate": "2025-03-09T16:39:29Z",
+            "mfaAuthenticated": "false"
+          }
+        }
+      },
+      "eventTime": "2025-04-12T16:55:32Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "GetSAMLProvider",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "192.0.2.1",
+      "userAgent": "aws-cli/2.9.19",
+      "requestParameters": {
+        "samlProviderArn": "arn:aws:iam::123456789012:saml-provider/OktaSAML"
+      },
+      "responseElements": null,
+      "requestID": "4c23c774-e2b5-46fe-83b9-EXAMPLE",
+      "eventID": "2a9c402c-5df4-4e68-a21f-EXAMPLE",
+      "readOnly": true,
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "123456789012",
+      "eventCategory": "Management"
+    }
+  ]
+}

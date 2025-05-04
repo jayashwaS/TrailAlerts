@@ -1,0 +1,28 @@
+title: AWS S3 Lifecycle Rule with Short Expiration on CloudTrail Bucket
+id: 4d5e6f7a-8b9c-0d1e-2f3a-4b5c6d7e8f9g
+status: test
+description: Detects the application of an S3 Lifecycle Rule with a short expiration period on the S3 bucket used by AWS CloudTrail, which could lead to premature deletion of log files.
+references:
+  - https://stratus-red-team.cloud/attack-techniques/AWS/aws.defense-evasion.cloudtrail-lifecycle-rule/
+  - https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html
+author: adanalvarez
+date: 2025-04-12
+modified: 2025-04-12
+tags:
+  - attack.defense_evasion
+  - attack.t1562.001
+logsource:
+  product: aws
+  service: s3
+  category: management
+detection:
+  selection:
+    eventSource: s3.amazonaws.com
+    eventName: PutBucketLifecycleConfiguration
+    requestParameters.lifecycleConfiguration.rules:
+      - expiration:
+          days: 1
+  condition: selection
+falsepositives:
+  - Legitimate administrative actions setting short expiration periods for specific operational needs
+level: high

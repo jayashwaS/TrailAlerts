@@ -1,0 +1,80 @@
+{
+  "should_match": [
+    {
+      "eventVersion": "1.08",
+      "userIdentity": {
+        "type": "Root",
+        "principalId": "111122223333",
+        "arn": "arn:aws:iam::111122223333:root",
+        "accountId": "111122223333",
+        "accessKeyId": ""
+      },
+      "eventTime": "2023-07-12T13:35:31Z",
+      "eventSource": "signin.amazonaws.com",
+      "eventName": "ConsoleLogin",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "192.0.2.0",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
+      "requestParameters": null,
+      "responseElements": {
+        "ConsoleLogin": "Success"
+      },
+      "additionalEventData": {
+        "LoginTo": "https://console.aws.amazon.com/console/home?hashArgs=%23&isauthcode=true&nc2=h_ct&src=header-signin&state=hashArgsFromTB_ap-southeast-2_example80afacd389",
+        "MobileVersion": "No",
+        "MFAUsed": "No"
+      },
+      "eventID": "4217cc13-7328-4820-a90c-EXAMPLE8002e6",
+      "readOnly": false,
+      "eventType": "AwsConsoleSignIn",
+      "managementEvent": true,
+      "recipientAccountId": "111122223333",
+      "eventCategory": "Management",
+      "tlsDetails": {
+        "tlsVersion": "TLSv1.3",
+        "cipherSuite": "TLS_AES_128_GCM_SHA256",
+        "clientProvidedHostHeader": "signin.aws.amazon.com"
+      }
+    }    
+  ],
+  "should_not_match": [
+    {
+      "eventVersion": "1.09",
+      "userIdentity": {
+        "type": "AssumedRole",
+        "principalId": "AROEXAMPLE",
+        "arn": "arn:aws:sts::123456789012:assumed-role/ExampleRole/ExampleUser",
+        "accountId": "123456789012",
+        "accessKeyId": "ASIAXXXXXX",
+        "sessionContext": {
+          "sessionIssuer": {
+            "type": "Role",
+            "principalId": "AROEXAMPLE",
+            "arn": "arn:aws:iam::123456789012:role/ExampleRole",
+            "accountId": "123456789012",
+            "userName": "ExampleUserName"
+          },
+          "attributes": {
+            "creationDate": "2025-03-09T16:39:29Z",
+            "mfaAuthenticated": "false"
+          }
+        }
+      },
+      "eventTime": "2025-03-09T16:39:48Z",
+      "eventSource": "notifications.amazonaws.com",
+      "eventName": "ListNotificationHubs",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "1.2.3.4",
+      "userAgent": "ExampleAgent/1.0",
+      "requestParameters": null,
+      "responseElements": null,
+      "requestID": "4c23c774-e2b5-46fe-83b9-EXAMPLE",
+      "eventID": "2a9c402c-5df4-4e68-a21f-EXAMPLE",
+      "readOnly": true,
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "123456789012",
+      "eventCategory": "Management"
+    }
+  ]
+}

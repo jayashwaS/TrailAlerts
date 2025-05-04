@@ -1,0 +1,76 @@
+{
+  "should_match": [
+    {
+      "eventVersion": "1.09",
+      "userIdentity": {
+        "type": "IAMUser",
+        "principalId": "AIDAJ45QHBFG76EXAMPLE",
+        "arn": "arn:aws:iam::123456789012:user/alice",
+        "accountId": "123456789012",
+        "accessKeyId": "AKIAIOSFODNN7EXAMPLE",
+        "userName": "alice"
+      },
+      "eventTime": "2025-04-12T14:21:36Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "CreateAccessKey",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "192.0.2.1",
+      "userAgent": "aws-cli/2.17.12 Python/3.11.6 Linux/5.15.0-100-generic exe/x86_64.ubuntu.22",
+      "requestParameters": {
+        "userName": "bob"
+      },
+      "responseElements": {
+        "accessKey": {
+          "userName": "bob",
+          "status": "Active",
+          "accessKeyId": "AKIAI44QH8DHBEXAMPLE",
+          "createDate": "2025-04-12T14:21:36Z"
+        }
+      },
+      "requestID": "9c23c774-e2b5-46fe-83b9-EXAMPLE",
+      "eventID": "2a9c402c-5df4-4e68-a21f-EXAMPLE",
+      "readOnly": false,
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "123456789012",
+      "eventCategory": "Management"
+    }
+  ],
+  "should_not_match": [
+    {
+      "eventVersion": "1.09",
+      "userIdentity": {
+        "type": "IAMUser",
+        "principalId": "AIDAJKF7WHFFX3EXAMPLE",
+        "arn": "arn:aws:iam::123456789012:user/bob",
+        "accountId": "123456789012",
+        "accessKeyId": "AKIAIOSFODNN7EXAMPLE",
+        "userName": "bob"
+      },
+      "eventTime": "2025-04-12T15:10:22Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "CreateAccessKey",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "192.0.2.3",
+      "userAgent": "aws-cli/2.17.12 Python/3.11.6 Linux/5.15.0-100-generic exe/x86_64.ubuntu.22",
+      "requestParameters": {
+        "userName": "bob"
+      },
+      "responseElements": {
+        "accessKey": {
+          "userName": "bob",
+          "status": "Active",
+          "accessKeyId": "AKIAI44QH8DHBEXAMPLE",
+          "createDate": "2025-04-12T15:10:22Z"
+        }
+      },
+      "requestID": "7a23d884-e5c5-46fe-83b9-EXAMPLE",
+      "eventID": "8b9c402c-7ef4-4e68-a21f-EXAMPLE",
+      "readOnly": false,
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "123456789012",
+      "eventCategory": "Management"
+    }
+  ]
+}

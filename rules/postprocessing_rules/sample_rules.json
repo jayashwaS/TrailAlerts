@@ -1,0 +1,18 @@
+[
+  {
+    "type": "correlation",
+    "sigmaRuleTitle": "AWS CloudTrail Attach Policy",
+    "lookFor": "AWS CloudTrail IAM User Creation",
+    "windowMinutes": 15,
+    "severity_adjustment": "high",
+    "description": "User creation followed by policy attachment"
+  },
+  {
+  "type": "threshold",
+  "sigmaRuleTitle": "AWS SecretsManager GetSecretValue",
+  "thresholdCount": 10,
+  "windowMinutes": 5,
+  "severity_adjustment": "medium",
+  "description": "Multiple SecretsManager accesses by same actor in short time window"
+  }
+]

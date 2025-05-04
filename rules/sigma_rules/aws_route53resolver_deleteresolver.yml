@@ -1,0 +1,24 @@
+title: AWS Route 53 Resolver Query Log Configuration Deletion
+id: 5f6e7d8c-9b0a-1c2d-3e4f-5a6b7c8d9e0f
+status: test
+description: Detects deletion of Route 53 Resolver query logging configurations, which can disrupt DNS logging and hinder security monitoring.
+references:
+  - https://stratus-red-team.cloud/attack-techniques/AWS/aws.defense-evasion.dns-delete-logs/
+  - https://docs.aws.amazon.com/Route53/latest/APIReference/API_DeleteResolverQueryLogConfig.html
+author: adanalvarez
+date: 2025-04-12
+modified: 2025-04-12
+tags:
+  - attack.defense_evasion
+  - attack.t1562.002
+logsource:
+  product: aws
+  service: route53resolver
+detection:
+  selection:
+    eventSource: route53resolver.amazonaws.com
+    eventName: DeleteResolverQueryLogConfig
+  condition: selection
+falsepositives:
+  - Legitimate administrative actions removing obsolete DNS query logging configurations
+level: high

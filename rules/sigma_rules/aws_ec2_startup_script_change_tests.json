@@ -1,0 +1,90 @@
+{
+  "should_match": [
+    {
+      "eventVersion": "1.09",
+      "userIdentity": {
+        "type": "AssumedRole",
+        "principalId": "AROEXAMPLE",
+        "arn": "arn:aws:sts::123456789012:assumed-role/ExampleRole/ExampleUser",
+        "accountId": "123456789012",
+        "accessKeyId": "ASIAXXXXXX",
+        "sessionContext": {
+          "sessionIssuer": {
+            "type": "Role",
+            "principalId": "AROEXAMPLE",
+            "arn": "arn:aws:iam::123456789012:role/ExampleRole",
+            "accountId": "123456789012",
+            "userName": "ExampleUserName"
+          },
+          "attributes": {
+            "creationDate": "2025-03-09T16:39:29Z",
+            "mfaAuthenticated": "false"
+          }
+        }
+      },
+      "eventTime": "2025-03-09T16:39:48Z",
+      "eventSource": "ec2.amazonaws.com",
+      "eventName": "ModifyInstanceAttribute",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "1.2.3.4",
+      "userAgent": "ExampleAgent/1.0",
+      "requestParameters": {
+        "instanceId": "i-0abc123def456789",
+        "attribute": "userData",
+        "value": "IyEvYmluL2Jhc2gKZWNobyAiVGhpcyBpcyBhIG1vZGlmaWVkIHN0YXJ0dXAgc2NyaXB0IiA+IC90bXAvc3RhcnR1cF9jaGFuZ2VkLnR4dApjdXJsIC1zIGh0dHA6Ly9leGFtcGxlLmNvbS9wYXlsb2FkLnNoIHwgYmFzaA=="
+      },
+      "responseElements": null,
+      "requestID": "4c23c774-e2b5-46fe-83b9-EXAMPLE",
+      "eventID": "2a9c402c-5df4-4e68-a21f-EXAMPLE",
+      "readOnly": true,
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "123456789012",
+      "eventCategory": "Management"
+    }
+  ],
+  "should_not_match": [
+    {
+      "eventVersion": "1.09",
+      "userIdentity": {
+        "type": "AssumedRole",
+        "principalId": "AROEXAMPLE",
+        "arn": "arn:aws:sts::123456789012:assumed-role/ExampleRole/ExampleUser",
+        "accountId": "123456789012",
+        "accessKeyId": "ASIAXXXXXX",
+        "sessionContext": {
+          "sessionIssuer": {
+            "type": "Role",
+            "principalId": "AROEXAMPLE",
+            "arn": "arn:aws:iam::123456789012:role/ExampleRole",
+            "accountId": "123456789012",
+            "userName": "ExampleUserName"
+          },
+          "attributes": {
+            "creationDate": "2025-03-09T16:39:29Z",
+            "mfaAuthenticated": "false"
+          }
+        }
+      },
+      "eventTime": "2025-03-09T16:39:48Z",
+      "eventSource": "cloudtrail.amazonaws.com",
+      "eventName": "ModifyInstanceAttribute",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "1.2.3.4",
+      "userAgent": "ExampleAgent/1.0",
+      "requestParameters": {
+        "instanceId": "i-0abc123def456789",
+        "attribute": "instanceType",
+        "value": "t3.medium"
+      },
+      "responseElements": null,
+      "requestID": "4c23c774-e2b5-46fe-83b9-EXAMPLE",
+      "eventID": "2a9c402c-5df4-4e68-a21f-EXAMPLE",
+      "readOnly": true,
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "123456789012",
+      "eventCategory": "Management"
+    }
+  ]
+}

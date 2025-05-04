@@ -1,0 +1,82 @@
+{
+  "should_match": [
+    {
+      "eventVersion": "1.09",
+      "userIdentity": {
+        "type": "AssumedRole",
+        "principalId": "AROEXAMPLE",
+        "arn": "arn:aws:sts::123456789012:assumed-role/ExampleRole/ExampleUser",
+        "accountId": "123456789012",
+        "accessKeyId": "ASIAXXXXXX",
+        "sessionContext": {
+          "sessionIssuer": {
+            "type": "Role",
+            "principalId": "AROEXAMPLE",
+            "arn": "arn:aws:iam::123456789012:role/ExampleRole",
+            "accountId": "123456789012",
+            "userName": "ExampleUserName"
+          },
+          "attributes": {
+            "creationDate": "2025-03-09T16:39:29Z",
+            "mfaAuthenticated": "false"
+          }
+        }
+      },
+      "eventTime": "2025-03-09T16:39:48Z",
+      "eventSource": "organizations.amazonaws.com",
+      "eventName": "LeaveOrganization",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "1.2.3.4",
+      "userAgent": "ExampleAgent/1.0",
+      "requestParameters": null,
+      "responseElements": null,
+      "requestID": "4c23c774-e2b5-46fe-83b9-EXAMPLE",
+      "eventID": "2a9c402c-5df4-4e68-a21f-EXAMPLE",
+      "readOnly": true,
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "123456789012",
+      "eventCategory": "Management"
+    }
+  ],
+  "should_not_match": [
+    {
+      "eventVersion": "1.09",
+      "userIdentity": {
+        "type": "AssumedRole",
+        "principalId": "AROEXAMPLE",
+        "arn": "arn:aws:sts::123456789012:assumed-role/ExampleRole/ExampleUser",
+        "accountId": "123456789012",
+        "accessKeyId": "ASIAXXXXXX",
+        "sessionContext": {
+          "sessionIssuer": {
+            "type": "Role",
+            "principalId": "AROEXAMPLE",
+            "arn": "arn:aws:iam::123456789012:role/ExampleRole",
+            "accountId": "123456789012",
+            "userName": "ExampleUserName"
+          },
+          "attributes": {
+            "creationDate": "2025-03-09T16:39:29Z",
+            "mfaAuthenticated": "false"
+          }
+        }
+      },
+      "eventTime": "2025-03-09T16:39:48Z",
+      "eventSource": "cloudtrail.amazonaws.com",
+      "eventName": "LeaveOrganization",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "1.2.3.4",
+      "userAgent": "ExampleAgent/1.0",
+      "requestParameters": null,
+      "responseElements": null,
+      "requestID": "4c23c774-e2b5-46fe-83b9-EXAMPLE",
+      "eventID": "2a9c402c-5df4-4e68-a21f-EXAMPLE",
+      "readOnly": true,
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "123456789012",
+      "eventCategory": "Management"
+    }
+  ]
+}

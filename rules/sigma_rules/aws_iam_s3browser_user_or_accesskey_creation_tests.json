@@ -1,0 +1,115 @@
+{
+  "should_match": [
+    {
+      "eventVersion": "1.09",
+      "userIdentity": {
+        "type": "IAMUser",
+        "principalId": "AIDA123456789EXAMPLE",
+        "arn": "arn:aws:iam::123456789012:user/admin",
+        "accountId": "123456789012",
+        "accessKeyId": "AKIA123456789EXAMPLE",
+        "userName": "admin"
+      },
+      "eventTime": "2025-04-12T18:25:48Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "CreateUser",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "192.0.2.1",
+      "userAgent": "S3 Browser 9.5.3",
+      "requestParameters": {
+        "userName": "backdoor-user",
+        "path": "/"
+      },
+      "responseElements": {
+        "user": {
+          "userName": "backdoor-user",
+          "userId": "AIDA123456789BACKDOOR",
+          "arn": "arn:aws:iam::123456789012:user/backdoor-user",
+          "path": "/",
+          "createDate": "2025-04-12T18:25:48Z"
+        }
+      },
+      "requestID": "abcd1234-ef56-7890-abcd-ef1234567890",
+      "eventID": "2a9c402c-5df4-4e68-a21f-EXAMPLE",
+      "readOnly": false,
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "123456789012",
+      "eventCategory": "Management"
+    },
+    {
+      "eventVersion": "1.09",
+      "userIdentity": {
+        "type": "IAMUser",
+        "principalId": "AIDA123456789EXAMPLE",
+        "arn": "arn:aws:iam::123456789012:user/admin",
+        "accountId": "123456789012",
+        "accessKeyId": "AKIA123456789EXAMPLE",
+        "userName": "admin"
+      },
+      "eventTime": "2025-04-12T18:28:22Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "CreateAccessKey",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "192.0.2.1",
+      "userAgent": "S3 Browser 9.5.3",
+      "requestParameters": {
+        "userName": "backdoor-user"
+      },
+      "responseElements": {
+        "accessKey": {
+          "userName": "backdoor-user",
+          "accessKeyId": "AKIA123456789BACKDOOR",
+          "status": "Active",
+          "createDate": "2025-04-12T18:28:22Z"
+        }
+      },
+      "requestID": "efgh5678-ab12-3456-cdef-gh7890123456",
+      "eventID": "3b0d513d-6af5-4f79-b32e-EXAMPLE",
+      "readOnly": false,
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "123456789012",
+      "eventCategory": "Management"
+    }
+  ],
+  "should_not_match": [
+    {
+      "eventVersion": "1.09",
+      "userIdentity": {
+        "type": "IAMUser",
+        "principalId": "AIDA123456789EXAMPLE",
+        "arn": "arn:aws:iam::123456789012:user/admin",
+        "accountId": "123456789012",
+        "accessKeyId": "AKIA123456789EXAMPLE",
+        "userName": "admin"
+      },
+      "eventTime": "2025-04-12T18:32:32Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "CreateUser",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "192.0.2.1",
+      "userAgent": "aws-cli/2.9.19",
+      "requestParameters": {
+        "userName": "legitimate-user",
+        "path": "/"
+      },
+      "responseElements": {
+        "user": {
+          "userName": "legitimate-user",
+          "userId": "AIDA123456789LEGIT",
+          "arn": "arn:aws:iam::123456789012:user/legitimate-user",
+          "path": "/",
+          "createDate": "2025-04-12T18:32:32Z"
+        }
+      },
+      "requestID": "ijkl9012-cd34-5678-efgh-ij1234567890",
+      "eventID": "4c1e624e-7bg6-5h80-c43f-EXAMPLE",
+      "readOnly": false,
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "123456789012",
+      "eventCategory": "Management"
+    }
+  ]
+}

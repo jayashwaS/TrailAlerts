@@ -1,0 +1,10 @@
+{
+    "AWS SecretsManager GetSecretValue":{
+        "excludedActors":["arn:aws:iam::123456789012:user/ci-bot","arn:aws:iam::123456789012:role/app-sync"],
+        "excludedSourceIPs":["10.0.1.100"],
+        "excludedActorsRegex":[".*AWSReservedSSO_AdministratorAccess.*"]
+        },
+    "AWS Console Login":{
+        "excludedActors":["arn:aws:iam::123456789012:user/monitoring"]
+    }
+}

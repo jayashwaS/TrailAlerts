@@ -1,0 +1,24 @@
+title: AWS CloudTrail PutEventSelectors with includeManagementEvents Disabled
+id: e7f3c2d1-4b5a-6c7d-8e9f-0a1b2c3d4e5f
+status: test
+description: Detects usage of the PutEventSelectors API call with includeManagementEvents set to false, which disables logging of management events in AWS CloudTrail.
+references:
+  - https://stratus-red-team.cloud/attack-techniques/AWS/aws.defense-evasion.cloudtrail-event-selectors/
+  - https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_PutEventSelectors.html
+author: adanalvarez
+date: 2025-04-12
+modified: 2025-04-12
+tags:
+  - attack.defense_evasion
+  - attack.t1562.002
+logsource:
+  product: aws
+  service: cloudtrail
+detection:
+  selection:
+    eventSource: cloudtrail.amazonaws.com
+    eventName: PutEventSelectors
+  condition: selection
+falsepositives:
+  - Legitimate administrative actions modifying event selectors
+level: high

@@ -1,0 +1,25 @@
+title: AWS EC2 DeleteFlowLogs API Call
+id: 7b8c9d0e-1f2a-3b4c-5d6e-7f8g9h0i1j2k
+status: test
+description: Detects usage of the DeleteFlowLogs API call, which removes VPC Flow Logs and can hinder network traffic monitoring.
+references:
+  - https://stratus-red-team.cloud/attack-techniques/AWS/aws.defense-evasion.vpc-remove-flow-logs/
+  - https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteFlowLogs.html
+author: adanalvarez
+date: 2025-04-12
+modified: 2025-04-12
+tags:
+  - attack.defense_evasion
+  - attack.t1562.002
+logsource:
+  product: aws
+  service: ec2
+  category: management
+detection:
+  selection:
+    eventSource: ec2.amazonaws.com
+    eventName: DeleteFlowLogs
+  condition: selection
+falsepositives:
+  - Legitimate administrative actions removing obsolete VPC Flow Logs
+level: high
