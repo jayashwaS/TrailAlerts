@@ -7,7 +7,7 @@
 
 # TrailAlerts
 
-TrailAlerts is a **native, serverless cloud-detection tool (not a SIEM)** that lets you define simple rules (written in open Sigma syntax) as code and get rich alerts about events in AWS.
+TrailAlerts is a **AWS-native, serverless cloud-detection tool (not a SIEM)** that lets you define simple rules (written in open Sigma syntax) as code and get rich alerts about events in AWS.
 
 It is aimed at people/companies who do **not** need a SIEM but still want ownership of their detections and find CloudWatch or EventBridge rules hard to manage.
 
@@ -338,7 +338,7 @@ The recommended deployment configuration follows GitOps practices, allowing you 
 4. **Configure GitHub repository secrets**
    - Add an `AWS_ACCOUNT_ID` secret with your AWS account ID
   
-5. ** Create a branch to modify the configuration**
+5. **Create a branch to modify the configuration**
    - Create a branch to apply the configuration from steps 6 and 7
 
 6. **Configure Terraform backend**
