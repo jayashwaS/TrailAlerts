@@ -1,4 +1,5 @@
-name: Deploy TrailAlerts
+name: Deploy TrailAlerts 
+description: Deploy TrailAlerts infrastructure and Lambda functions
 
 on:
   push:
