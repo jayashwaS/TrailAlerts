@@ -1,7 +1,7 @@
-title: AWS S3 PutObject With SSE-C AES256  
-id: 7f8e9d0c-1234-5678-90ab-cdef12345678  
-description: Detect S3 PutObject calls with customer-provided AES256 encryption (SSE-C)  
-author: jay  
+title: AWS S3 PutObject With Server-Side Encryption AES256  
+id: 3f6e8b9c-4567-1234-89ab-0cdef1234567  
+description: Detect S3 PutObject calls specifying AES256 server-side encryption (SSE-S3)  
+author: YourName  
 date: 2025-05-06  
 logsource:  
   product: aws  
@@ -11,9 +11,9 @@ detection:
   selection:  
     eventSource: s3.amazonaws.com  
     eventName: PutObject  
-    # substring match against the JSON blob in requestParameters
-    requestParameters|contains:
-      - '"x-amz-server-side-encryption-customer-algorithm":"AES256"'  
+    # match the SSE-S3 field in the JSON blob
+    requestParameters|contains:  
+      - '"x-amz-server-side-encryption":"AES256"'  
 
   condition: selection  
 
