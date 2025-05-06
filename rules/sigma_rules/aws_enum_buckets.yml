@@ -25,4 +25,4 @@ detection:
     condition: selection
 falsepositives:
     - Administrators listing buckets, it may be necessary to filter out users who commonly conduct this activity.
-level: low
+level: high
