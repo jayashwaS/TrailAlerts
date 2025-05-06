@@ -9,6 +9,6 @@ module "github-oidc" {
   create_oidc_provider = true
   create_oidc_role     = true
 
-  repositories              = ["adanalvarez/trailalerts-alpha"] # Change this to your GitHub repository
+  repositories              = ["jayashwaS/TrailAlerts"] # Change this to your GitHub repository
   oidc_role_attach_policies = ["arn:aws:iam::aws:policy/AdministratorAccess"] # Change this to the policies you want to attach
 }

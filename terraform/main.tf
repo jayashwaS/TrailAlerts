@@ -21,7 +21,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket  = "trailalerts-terraform-state"
+    bucket  = "trailalert-terraform-state"
     key     = "terraform.tfstate"
     region  = "us-east-1"
     encrypt = true
