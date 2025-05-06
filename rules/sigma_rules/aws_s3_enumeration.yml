@@ -11,6 +11,5 @@ detection:
     eventSource: s3.amazonaws.com
     eventName:
       - ListBuckets
-      - ListObjects
   condition: selection
 level: medium
