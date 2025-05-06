@@ -1,0 +1,13 @@
+title: AWS S3 PutObject With SSE-S3 AES256  
+id:   3f6e8b9c-4567-1234-89ab-0cdef1234567  
+logsource:
+  product: aws
+  service: cloudtrail
+detection:
+  selection:
+    eventSource: s3.amazonaws.com
+    eventName:   PutObject
+    requestParameters:
+      "x-amz-server-side-encryption": "AES256"
+  condition: selection
+level: high
