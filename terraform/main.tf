@@ -20,12 +20,12 @@ terraform {
     }
   }
 
-  #backend "s3" {
-  #  bucket  = "trailalerts-terraform-state-123123123123" # Change this to your S3 bucket name
-  #  key     = "terraform.tfstate"
-  #  region  = "us-east-1"
-  #  encrypt = true
-  #}
+  backend "s3" {
+    bucket  = "trailalerts-terraform-state"
+    key     = "terraform.tfstate"
+    region  = "us-east-1"
+    encrypt = true
+  }
 }
 
 data "aws_caller_identity" "current" {}
