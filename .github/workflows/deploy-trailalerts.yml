@@ -1,5 +1,5 @@
-name: Deploy TrailAlerts
-
+name: Deploy TrailAlerts #name of the workflow
+description: Deploy TrailAlerts infrastructure using Terraform
 on:
   push:
     branches: [ main ]
