@@ -1,0 +1,68 @@
+name: Manual Terraform Commands
+
+on:
+  workflow_dispatch: # Allows manual triggering
+    inputs:
+      terraform_command:
+        description: 'Full Terraform command to run (e.g., "import aws_iam_role.example_role example_role_name" or "state rm aws_iam_role.example_role")'
+        required: true
+        type: string
+      working_directory:
+        description: 'Terraform working directory (e.g., "terraform")'
+        required: true
+        default: 'terraform'
+        type: string
+
+permissions:
+  id-token: write   # Required to fetch OIDC token
+  contents: read    # Required to checkout code
+
+jobs:
+  run-manual-command:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ${{ github.event.inputs.working_directory }} # Set working directory based on input
+
+    env:
+      AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+      # Add any other TF_VAR_ environment variables if your init/plan requires them,
+      # though for import/state rm they are usually not needed unless they affect backend config.
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Login to AWS
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-region: us-east-1 # Or your specific AWS region from secrets/variables
+        role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/GitHubActions-TrailAlerts-DeployRole # Use the same role as your deployment
+        role-session-name: ManualTerraformCommandSession
+        role-duration-seconds: 900
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      # You can add CLI config for backend here if needed, but init should handle it
+
+    - name: Terraform Init
+      id: init
+      run: terraform init
+      # Add -backend-config options here if they are dynamically set and not in the .tf files
+      # e.g., -backend-config="bucket=my-tf-state-bucket" -backend-config="key=path/to/state.tfstate" -backend-config="region=us-east-1"
+
+    - name: Execute Provided Terraform Command
+      id: manual_command
+      run: |
+        echo "Executing: terraform ${{ github.event.inputs.terraform_command }}"
+        terraform ${{ github.event.inputs.terraform_command }}
+
+    - name: Verify Command Output (Example)
+      run: |
+        echo "Command executed. Review the output above."
+        # For import, you might want to run a 'terraform plan' afterwards to see the effect
+        # if [[ "${{ github.event.inputs.terraform_command }}" == import* ]]; then
+        #   echo "Running terraform plan to check import status..."
+        #   terraform plan -no-color
+        # fi
