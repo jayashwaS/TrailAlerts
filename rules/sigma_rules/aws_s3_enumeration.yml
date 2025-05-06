@@ -1,0 +1,16 @@
+title: AWS S3 Enumeration Detected
+id: 2b4c6e7f-0123-4567-89ab-cdef01234567
+description: Detect S3 bucket or object enumeration
+author: jay
+date: 2025-05-06
+logsource:
+  product: aws
+  service: cloudtrail
+detection:
+  selection:
+    eventSource: s3.amazonaws.com
+    eventName:
+      - ListBuckets
+      - ListObjects
+  condition: selection
+level: medium

@@ -1,0 +1,13 @@
+title: AWS CloudTrail API Call Failure
+id: e3d8f7a2-abcdef01-2345-6789-abcdef012345
+description: Detect any failed AWS API calls (errorCode present)
+author: jay
+date: 2025-05-06
+logsource:
+  product: aws
+  service: cloudtrail
+detection:
+  selection:
+    errorCode|exists: true
+  condition: selection
+level: low

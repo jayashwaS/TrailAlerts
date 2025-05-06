@@ -1,0 +1,27 @@
+[
+    {
+      "type": "threshold",
+      "sigmaRuleTitle": "AWS CloudTrail API Call Failure",
+      "thresholdCount": 2,
+      "windowMinutes": 30,
+      "severity_adjustment": "medium",
+      "description": "More than 1 failed API calls within 30 minutes"
+    },
+    {
+      "type": "correlation",
+      "sigmaRuleTitle": "AWS CloudTrail API Call Failure",
+      "lookFor": "AWS S3 Enumeration Detected",
+      "windowMinutes": 30,
+      "severity_adjustment": "high",
+      "description": "Multiple API failures followed by S3 enumeration"
+    },
+    {
+      "type": "correlation",
+      "sigmaRuleTitle": "AWS S3 Enumeration Detected",
+      "lookFor": "AWS S3 PutObject With AES256 SSE",
+      "windowMinutes": 30,
+      "severity_adjustment": "critical",
+      "description": "S3 enumeration followed by a PutObject with AES256 SSE"
+    }
+  ]
+  

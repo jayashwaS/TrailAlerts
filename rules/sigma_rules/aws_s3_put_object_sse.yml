@@ -1,0 +1,16 @@
+title: AWS S3 PutObject With AES256 SSE
+id: 7f8e9d0c-1234-5678-90ab-cdef12345678
+description: Detect S3 PutObject calls specifying AES256 server-side encryption
+author: jay
+date: 2025-05-06
+logsource:
+  product: aws
+  service: cloudtrail
+detection:
+  selection:
+    eventSource: s3.amazonaws.com
+    eventName: PutObject
+    requestParameters:
+      ServerSideEncryption: AES256
+  condition: selection
+level: high
