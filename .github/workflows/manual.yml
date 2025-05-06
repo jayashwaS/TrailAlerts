@@ -1,12 +1,18 @@
-name: Manual Terraform Commands
+name: Manual Terraform Commands (Batch - Continue on Error)
 
 on:
   workflow_dispatch: # Allows manual triggering
     inputs:
-      terraform_command:
-        description: 'Full Terraform command to run (e.g., "import aws_iam_role.example_role example_role_name" or "state rm aws_iam_role.example_role")'
+      terraform_commands:
+        description: |
+          Terraform commands to run, one per line.
+          Each command will be attempted. If a command fails (e.g., import target not found),
+          it will be logged, and the script will continue to the next command.
+          Example for imports:
+          import aws_iam_role.role1 role1_name
+          import aws_s3_bucket.bucket1 bucket1_name
         required: true
-        type: string
+        type: string # Multi-line input
       working_directory:
         description: 'Terraform working directory (e.g., "terraform")'
         required: true
@@ -18,17 +24,16 @@ permissions:
   contents: read    # Required to checkout code
 
 jobs:
-  run-manual-command:
+  run-manual-commands-batch:
     runs-on: ubuntu-latest
     defaults:
       run:
         shell: bash
-        working-directory: ${{ github.event.inputs.working_directory }} # Set working directory based on input
+        working-directory: ${{ github.event.inputs.working_directory }}
 
     env:
       AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-      # Add any other TF_VAR_ environment variables if your init/plan requires them,
-      # though for import/state rm they are usually not needed unless they affect backend config.
+      # Add any other TF_VAR_ environment variables if your init/plan requires them.
 
     steps:
     - name: Checkout code
@@ -38,31 +43,72 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v4
       with:
         aws-region: us-east-1 # Or your specific AWS region from secrets/variables
-        role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/GitHubActions-TrailAlerts-DeployRole # Use the same role as your deployment
-        role-session-name: ManualTerraformCommandSession
-        role-duration-seconds: 900
+        role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/GitHubActions-TrailAlerts-DeployRole # Use the same role
+        role-session-name: ManualTerraformBatchSession
+        role-duration-seconds: 1200 # Increased duration for potentially many commands
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3
-      # You can add CLI config for backend here if needed, but init should handle it
 
     - name: Terraform Init
       id: init
       run: terraform init
       # Add -backend-config options here if they are dynamically set and not in the .tf files
-      # e.g., -backend-config="bucket=my-tf-state-bucket" -backend-config="key=path/to/state.tfstate" -backend-config="region=us-east-1"
 
-    - name: Execute Provided Terraform Command
-      id: manual_command
+    - name: Execute Provided Terraform Commands Sequentially
+      id: manual_commands_batch
       run: |
-        echo "Executing: terraform ${{ github.event.inputs.terraform_command }}"
-        terraform ${{ github.event.inputs.terraform_command }}
+        echo "Executing batch Terraform commands. Individual command failures will be logged but will not stop the batch."
+        
+        IFS=$'\n' # Set Internal Field Separator to newline
+        read -r -d '' -a commands_array <<< "${{ github.event.inputs.terraform_commands }}"
+        
+        COMMANDS_SUCCESSFUL=0
+        COMMANDS_FAILED=0
 
-    - name: Verify Command Output (Example)
+        for cmd in "${commands_array[@]}"; do
+          # Trim leading/trailing whitespace from command, skip if empty
+          trimmed_cmd=$(echo "$cmd" | xargs)
+          if [ -z "$trimmed_cmd" ]; then
+            echo "Skipping empty line."
+            continue
+          fi
+          
+          echo "-----------------------------------------------------"
+          echo "Attempting: terraform $trimmed_cmd"
+          echo "-----------------------------------------------------"
+          
+          # Execute the command and explicitly check its status without letting it fail the whole script block immediately
+          if terraform $trimmed_cmd; then
+            echo "SUCCESS: Command 'terraform $trimmed_cmd' executed successfully."
+            COMMANDS_SUCCESSFUL=$((COMMANDS_SUCCESSFUL + 1))
+          else
+            # Capture the exit code
+            RESULT=$?
+            echo "INFO: Command 'terraform $trimmed_cmd' failed with exit code $RESULT."
+            echo "This might be expected if an 'import' target does not exist in AWS,"
+            echo "or if a 'state rm' target is not in the state, or for other reasons."
+            echo "Continuing to next command..."
+            COMMANDS_FAILED=$((COMMANDS_FAILED + 1))
+          fi
+          echo "" # Newline for readability
+        done
+
+        echo "-----------------------------------------------------"
+        echo "Batch processing summary:"
+        echo "Commands Attempted: ${#commands_array[@]}"
+        echo "Successful: $COMMANDS_SUCCESSFUL"
+        echo "Failed/Skipped: $COMMANDS_FAILED"
+        echo "-----------------------------------------------------"
+        echo "All commands processed. Review logs for individual command success/failure details."
+        echo "A failed 'import' for a resource that does NOT exist in AWS is an expected outcome if your goal is to skip non-existent resources."
+        echo "The Terraform state file on S3 has been updated accordingly by successful commands."
+
+    - name: Optional: Run Terraform Plan After Batch
+      if: always() # Run this step even if previous steps had "soft" failures, to see the outcome
       run: |
-        echo "Command executed. Review the output above."
-        # For import, you might want to run a 'terraform plan' afterwards to see the effect
-        # if [[ "${{ github.event.inputs.terraform_command }}" == import* ]]; then
-        #   echo "Running terraform plan to check import status..."
-        #   terraform plan -no-color
-        # fi
+        echo "-----------------------------------------------------"
+        echo "Running terraform plan to see the current state after batch operations..."
+        echo "This plan will reflect any successful imports or state modifications."
+        echo "-----------------------------------------------------"
+        terraform plan -no-color
